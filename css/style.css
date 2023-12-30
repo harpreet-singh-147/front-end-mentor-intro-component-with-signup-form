@@ -239,13 +239,18 @@ body::before {
 .subscription__form-terms {
   text-align: center;
   font-size: 1.11rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--off-gray);
 }
 
 .subscription__form-terms-href {
   text-decoration: none;
   color: var(--red);
+  font-weight: 700;
+}
+
+.subscription__form-terms-href:hover {
+  text-decoration: underline;
 }
 
 .attribution {
@@ -255,7 +260,13 @@ body::before {
 }
 
 .attribution a {
-  color: hsl(228, 45%, 44%);
+  color: inherit;
+  text-decoration: none;
+}
+
+.attribution a:hover {
+  text-decoration: underline;
+  color: var(--white);
 }
 
 @media only screen and (max-width: 1440px) {
