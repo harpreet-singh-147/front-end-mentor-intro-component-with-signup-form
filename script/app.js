@@ -49,10 +49,18 @@ const validateInput = input => {
   return { isValid, errorMessage };
 };
 
-const showError = (input, errorIcon, errorMessage, validationErrorMessage) => {
+const showError = (
+  input,
+  errorIcon,
+  errorMessage,
+  validationErrorMessage,
+  label
+) => {
   input.setAttribute('aria-invalid', 'true');
   input.classList.add('input-error');
+  input.classList.add('input-error-outline');
 
+  label.style.color = 'hsl(0, 100%, 74%)';
   errorIcon.style.visibility = 'visible';
   errorMessage.textContent = validationErrorMessage;
 
@@ -67,10 +75,13 @@ const showError = (input, errorIcon, errorMessage, validationErrorMessage) => {
   }, 10);
 };
 
-const hideError = (input, errorIcon, errorMessage) => {
+const hideError = (input, errorIcon, errorMessage, label) => {
   input.setAttribute('aria-invalid', 'false');
   input.classList.remove('input-error');
+  input.classList.remove('input-error-outline');
   input.style.borderColor = 'black';
+  label.style.color = '';
+
   errorIcon.style.opacity = 0;
 
   errorMessage.style.opacity = 0;
@@ -94,6 +105,7 @@ const handleSubmit = e => {
       validateInput(input);
     const errorIcon = errorIcons[i];
     const errorMessage = errorMessages[i];
+    const label = document.querySelector(`label[for='${input.id}']`);
 
     formData[input.name] = input.value.trim();
 
@@ -102,16 +114,15 @@ const handleSubmit = e => {
     }
 
     if (!isValid) {
-      input.style.borderColor = 'hsl(0, 100%, 74%)';
       input.style.color = 'hsl(0, 100%, 74%)';
-      showError(input, errorIcon, errorMessage, validationErrorMessage);
+      showError(input, errorIcon, errorMessage, validationErrorMessage, label);
       isFormValid = false;
 
       if (!firstInvalidInput) {
         firstInvalidInput = input;
       }
     } else {
-      hideError(input, errorIcon, errorMessage);
+      hideError(input, errorIcon, errorMessage, label);
     }
   });
 
@@ -124,46 +135,52 @@ const handleSubmit = e => {
 
   if (isFormValid) {
     console.log(formData);
+
+    inputs.forEach(input => {
+      input.value = ''; // Clear each input
+    });
   }
 };
 
-const handleInput = (input, errorIcon, errorMessage) => {
+const handleInput = (input, errorIcon, errorMessage, label) => {
   const { isValid, errorMessage: validationErrorMessage } =
     validateInput(input);
 
   if (isValid) {
-    hideError(input, errorIcon, errorMessage);
+    hideError(input, errorIcon, errorMessage, label);
   } else {
-    showError(input, errorIcon, errorMessage, validationErrorMessage);
+    showError(input, errorIcon, errorMessage, validationErrorMessage, label);
   }
 
   updateLabelPosition(input);
 };
 
 inputs.forEach((input, i) => {
+  const label = document.querySelector(`label[for='${input.id}']`);
   const errorIcon = errorIcons[i];
   const errorMessage = errorMessages[i];
   input.style.color = 'hsl(249, 10%, 26%)';
 
   input.addEventListener('input', () =>
-    handleInput(input, errorIcon, errorMessage)
+    handleInput(input, errorIcon, errorMessage, label)
   );
 
   input.addEventListener('change', () =>
-    handleInput(input, errorIcon, errorMessage)
+    handleInput(input, errorIcon, errorMessage, label)
   );
 
   input.addEventListener('focus', () =>
-    handleInput(input, errorIcon, errorMessage)
+    handleInput(input, errorIcon, errorMessage, label)
   );
 
   input.addEventListener('blur', e => {
     inputs.forEach((input, i) => {
+      const label = document.querySelector(`label[for='${input.id}']`);
       const errorIcon = errorIcons[i];
       const errorMessage = errorMessages[i];
 
       if (input.value.trim().length === 0) {
-        hideError(input, errorIcon, errorMessage);
+        hideError(input, errorIcon, errorMessage, label);
       }
     });
   });
@@ -172,11 +189,12 @@ inputs.forEach((input, i) => {
 document.addEventListener('click', e => {
   if (!subscriptionForm.contains(e.target)) {
     inputs.forEach((input, i) => {
+      const label = document.querySelector(`label[for='${input.id}']`);
       const errorIcon = errorIcons[i];
       const errorMessage = errorMessages[i];
 
       if (input.value.trim().length === 0) {
-        hideError(input, errorIcon, errorMessage);
+        hideError(input, errorIcon, errorMessage, label);
       }
     });
     inputs[0].focus();
