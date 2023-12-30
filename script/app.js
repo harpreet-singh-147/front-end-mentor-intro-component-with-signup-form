@@ -188,6 +188,7 @@ inputs.forEach((input, i) => {
 
 document.addEventListener('click', e => {
   const validationResults = [];
+
   if (!subscriptionForm.contains(e.target)) {
     inputs.forEach((input, i) => {
       const label = document.querySelector(`label[for='${input.id}']`);
@@ -205,9 +206,22 @@ document.addEventListener('click', e => {
     const indexOfFirstError = validationResults.findIndex(
       error => error.errorMessage
     );
-    indexOfFirstError === -1
-      ? inputs[0].focus()
-      : inputs[indexOfFirstError].focus();
+
+    let indexOfLastValidInput = -1;
+    for (let i = validationResults.length - 1; i >= 0; i--) {
+      if (validationResults[i].isValid) {
+        indexOfLastValidInput = i;
+        break;
+      }
+    }
+
+    if (indexOfFirstError !== -1) {
+      inputs[indexOfFirstError].focus();
+    } else if (indexOfLastValidInput !== -1) {
+      inputs[indexOfLastValidInput + 1].focus();
+    } else {
+      inputs[0].focus();
+    }
   }
 });
 
