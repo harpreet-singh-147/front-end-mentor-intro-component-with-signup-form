@@ -187,6 +187,7 @@ inputs.forEach((input, i) => {
 });
 
 document.addEventListener('click', e => {
+  const validationResults = [];
   if (!subscriptionForm.contains(e.target)) {
     inputs.forEach((input, i) => {
       const label = document.querySelector(`label[for='${input.id}']`);
@@ -195,9 +196,18 @@ document.addEventListener('click', e => {
 
       if (input.value.trim().length === 0) {
         hideError(input, errorIcon, errorMessage, label);
+      } else if (input.value.trim().length > 0) {
+        const validationResult = validateInput(input);
+        validationResults.push(validationResult);
       }
     });
-    inputs[0].focus();
+
+    const indexOfFirstError = validationResults.findIndex(
+      error => error.errorMessage
+    );
+    indexOfFirstError === -1
+      ? inputs[0].focus()
+      : inputs[indexOfFirstError].focus();
   }
 });
 
