@@ -195,11 +195,13 @@ body::before {
 }
 
 .subscription__form-error {
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
   max-height: 0;
   visibility: hidden;
   opacity: 0;
   font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
   color: var(--red);
   align-self: flex-end;
   transition: all 0.1s ease;
