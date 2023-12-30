@@ -1,42 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
   <title>Frontend Mentor | Intro component with sign up form</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+  <main class="main">
+    <article class="subscription">
 
-  Learn to code by watching others
+      <section class="subscription__content">
+        <header class="subscription__content-header">
+          <h1 class="subscription__content-heading">Learn to code by watching others</h1>
+        </header>
+        <p class="subscription__content-text">See how experienced developers solve problems in real-time. Watching
+          scripted
+          tutorials is great,
+          but understanding how developers think is invaluable.</p>
+      </section>
 
-  See how experienced developers solve problems in real-time. Watching scripted tutorials is great, 
-  but understanding how developers think is invaluable. 
+      <section class="subscription__form-container">
+        <header class="subscription__form-header">
+          <h2 class="subscription__form-heading">Try it free 7 days<span> then $20/mo. thereafter</span> </h2>
+        </header>
+        <form class="subscription__form" novalidate>
 
-  Try it free 7 days then $20/mo. thereafter
+          <div class="subscription__form-group">
+            <div class="subscription__form-input-container">
+              <input type="text" id="firstName" name="firstName" class="subscription__form-input"
+                aria-describedby="firstNameError" aria-required="true" aria-invalid="false">
+              <label for="firstName" class="subscription__form-label">First Name</label>
+              <img src="images/icon-error.svg" alt="" aria-hidden="true" class="subscription__form-error-icon">
+            </div>
+            <span class="subscription__form-error" id="firstNameError" aria-live="polite"></span>
+          </div>
 
-  First Name 
-  Last Name 
-  Email Address
-  Password
+          <div class="subscription__form-group">
+            <div class="subscription__form-input-container">
+              <input type="text" id="lastName" name="lastName" class="subscription__form-input"
+                aria-describedby="lastNameError" aria-required="true" aria-invalid="false">
+              <label for="lastName" class="subscription__form-label">Last Name</label>
+              <img src="images/icon-error.svg" alt="" aria-hidden="true" class="subscription__form-error-icon">
+            </div>
+            <span class="subscription__form-error" id="lastNameError" aria-live="polite"></span>
+          </div>
 
-  Claim your free trial 
+          <div class="subscription__form-group">
+            <div class="subscription__form-input-container">
+              <input type="email" id="emailAddress" name="emailAddress" class="subscription__form-input"
+                aria-describedby="emailError" aria-required="true" aria-invalid="false">
+              <label for="emailAddress" class="subscription__form-label">Email Address</label>
+              <img src="images/icon-error.svg" alt="" aria-hidden="true" class="subscription__form-error-icon">
+            </div>
+            <span class="subscription__form-error" id="emailError" aria-live="polite"></span>
+          </div>
 
-  By clicking the button, you are agreeing to our Terms and Services
-  
-  <footer>
-    <p class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-      Coded by <a href="#">Your Name Here</a>.
-    </p>
+          <div class="subscription__form-group">
+            <div class="subscription__form-input-container">
+              <input type="password" id="password" name="password" class="subscription__form-input"
+                aria-describedby="passwordError" aria-required="true" aria-invalid="false">
+              <label for="password" class="subscription__form-label">Password</label>
+              <img src="images/icon-error.svg" alt="" aria-hidden="true" class="subscription__form-error-icon">
+            </div>
+            <span class="subscription__form-error" id="passwordError" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="subscription__form-btn-submit">Claim your free trial</button>
+          <p class="subscription__form-terms">
+            By clicking the button, you are agreeing to our
+            <a class="subscription__form-terms-href" href="#" aria-label="Read more about Terms and Services">Terms and
+              Services</a>
+          </p>
+        </form>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+      aria-label="Visit Frontend Mentor Website" rel="noopener noreferrer" referrerpolicy="no-referrer">Frontend
+      Mentor</a>. <br>
+    Coded by <a href="https://github.com/harpreet-singh-147" aria-label="More about Harpreet Singh" target="_blank"
+      rel="noopener noreferrer" referrerpolicy="no-referrer">Harpreet Singh.</a>
   </footer>
+  <script src="script/app.js"></script>
 </body>
+
 </html>
