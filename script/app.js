@@ -190,17 +190,9 @@ document.addEventListener('click', e => {
   const validationResults = [];
 
   if (!subscriptionForm.contains(e.target)) {
-    inputs.forEach((input, i) => {
-      const label = document.querySelector(`label[for='${input.id}']`);
-      const errorIcon = errorIcons[i];
-      const errorMessage = errorMessages[i];
-
-      if (input.value.trim().length === 0) {
-        hideError(input, errorIcon, errorMessage, label);
-      } else if (input.value.trim().length > 0) {
-        const validationResult = validateInput(input);
-        validationResults.push(validationResult);
-      }
+    inputs.forEach(input => {
+      const validationResult = validateInput(input);
+      validationResults.push(validationResult);
     });
 
     const indexOfFirstError = validationResults.findIndex(
