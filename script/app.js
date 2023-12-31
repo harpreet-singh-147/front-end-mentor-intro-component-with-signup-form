@@ -137,7 +137,7 @@ const handleSubmit = e => {
     console.log(formData);
 
     inputs.forEach(input => {
-      input.value = ''; // Clear each input
+      input.value = '';
     });
   }
 };
